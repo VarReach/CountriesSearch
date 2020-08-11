@@ -7,5 +7,6 @@
   require "./controllers/BaseController.php";
 
   class CountriesController extends BaseController {
+    public $allowedMethods = array("GET");
   }
 ?>

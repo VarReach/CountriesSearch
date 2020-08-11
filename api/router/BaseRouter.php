@@ -14,14 +14,31 @@
     //      LIFECYLCE
     // ==================
 
+    /**
+     * Sets up CORS and grabs request information.
+     * @constructor
+     */
     function __construct() {
       header('Content-type: application/json');
+
+      // CORS Setup
+      if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header("Access-Control-Allow-Methods: *");
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+          header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+        }
+      }
       header("Access-Control-Allow-Origin: *");
 
       $this->uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
       $this->method = $_SERVER['REQUEST_METHOD'];
     }
 
+    /**
+     * Checks if the route/method should be allowed.
+     * Returns information gathered from the Controller.
+     * @deconstructor
+     */
     function __destruct() {
       $currentRoute = $this->getCurrentRoute();
       if (!$this->checkIfRouteAvailable($currentRoute)) {
@@ -39,6 +56,11 @@
     //   PUBLIC METHODS
     // ==================
 
+    /**
+     * Defines up a new route
+     * @param {string}     $route - The route we are intended to define
+     * @param {Controller} $cont  - The controller we want to use for this route
+     */
     public function use($route, $cont) {
       if (!isset($cont) or !isset($route)) {
         http_response_code(500);
