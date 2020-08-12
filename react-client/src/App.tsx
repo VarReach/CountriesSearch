@@ -45,8 +45,10 @@ export const App: FC = () => {
       if (type !== "code" && type !== "name" && type !== "fullName") {
         updateURL({ ...queries, type: undefined });
       } else if (type && value) {
-        // Use first value if multiple are provided
-        value = Array.isArray(value) ? value[0] : value;
+        // Use last value if multiple are provided
+        value = Array.isArray(value) ? value[value.length - 1] : value;
+        // Remove additional values from URL
+        updateURL({ ...queries, value });
         fetchCountries(type, value);
       }
     }
