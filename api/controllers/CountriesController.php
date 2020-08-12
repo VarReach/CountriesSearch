@@ -8,6 +8,7 @@
 
   class CountriesController extends BaseController {
     public $allowedMethods = array("GET");
+    private $GET_FIELDS = "name;alpha2Code;alpha3Code;flag;region;subregion;population;languages";
 
     function __construct() {
       $this->uri = "https://restcountries.eu/rest/v2/";
@@ -61,6 +62,9 @@
 
     protected function get($filters) {
       list($type, $value, $filters) = $this->getDetails($filters);
+      // Only receive necessary fields
+      $filters['fields'] = $this->GET_FIELDS;
+
 
       /**
        * Callback to sort by population when searching by name or fullName
@@ -76,10 +80,19 @@
         echo json_encode($countries);
       }
 
+      /**
+       * When searching by code RestCountries only returns an individual Country. This
+       * converts it into an array with just that country for a uniform response.
+       */
+      function convertToArray($response) {
+        $country = array(json_decode($response, true));
+        echo json_encode($country);
+      }
+
       $this->execute("GET", [
         "filters" => $filters,
         "path" => $type . "/" . $value,
-        "callback" => $type !== "alpha" ? "sortCountriesByPopulation" : null
+        "callback" => $type !== "alpha" ? "sortCountriesByPopulation" : "convertToArray",
       ]);
 
     }
