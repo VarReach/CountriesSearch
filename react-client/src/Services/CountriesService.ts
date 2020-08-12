@@ -1,9 +1,9 @@
 import { Url } from "url";
 import axios from "axios";
 
-const BASE_URL = `https://${window.location.hostname}:${window.location.port}/api/countries`;
+const BASE_URL = `http://${window.location.hostname}:3001/api/countries`;
 
-export type SearchType = "code" | "name" | "fullName"
+export type SearchType = "code" | "name" | "fullName";
 
 export interface Country {
   languages: {
@@ -23,14 +23,14 @@ export interface Country {
 
 function CountriesService() {
   const service = {
-    get,
+    get: get,
   };
   // ==================
   //   PUBLIC METHODS
   // ==================
-  function get(type: SearchType, value: string): Promise<Country[]> {
-    const queryString = `?type=${type}&value=${value}`;
-    return axios.get(BASE_URL + queryString);
+  async function get(type: SearchType, value: string): Promise<Country[]> {
+    const response = await axios.get(BASE_URL, { params: { type, value }});
+    return response.data;
   }
 
   return service;
