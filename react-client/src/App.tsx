@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect } from "react";
-import CountriesService, { Country, SearchType } from "../Services/CountriesService";
+import CountriesService, { Country, SearchType } from "./Services/CountriesService";
 // Components
-import MainPage from "../Components/MainPage";
-import SearchPage from "../Components/SearchPage";
+import MainPage from "./Components/MainPage";
+import SearchPage from "./Components/SearchPage";
 
 type SearchContextValue = {
   fetchCountries: (type: SearchType, value: string) => void;
 }
-const SearchContext = React.createContext<SearchContextValue>({ fetchCountries: () => {} });
+const SearchContext = React.createContext<SearchContextValue>({ fetchCountries: () => null });
 
 export const App: FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -15,11 +15,11 @@ export const App: FC = () => {
   const [loading, setLoading] = useState<boolean>();
 
   useEffect(() => {
-    (async () => {
-      if (window.location.search) {
+    // (async () => {
+    //   if (window.location.search) {
 
-      }
-    })();
+    //   }
+    // })();
   }, []);
 
   const fetchCountries = async (type: SearchType, value: string) => {
@@ -37,7 +37,10 @@ export const App: FC = () => {
 
   return (
     <SearchContext.Provider value={{ fetchCountries }}>
-      {countries.length ? <SearchPage /> : <MainPage />}
+      {countries.length ? 
+      <SearchPage /> : 
+      <MainPage />
+      }
     </SearchContext.Provider>
   );
 }
