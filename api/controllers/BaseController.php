@@ -32,21 +32,6 @@
       return $filters;
     }
 
-    // /**
-    //  * Converts the filters associative array back into a queryString
-    //  * @param {Array} filters
-    //  * @return {string} 
-    //  */
-    // private function convertFiltersToQuery($filters) {
-    //   $queryString = "";
-    //   $filterKeys = array_keys($filters);
-    //   foreach ($filterKeys as &$key) {
-    //     $queryString .= ($key . $filters[$key]);
-    //   }
-
-    //   return $queryString;
-    // }
-
     // ==================
     //  PROTECTED METHODS
     // ==================

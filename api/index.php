@@ -5,9 +5,9 @@
   // =================
 
   require "vendor/autoload.php";
-  require_once "./router/BaseRouter.php";
+  require "./router/BaseRouter.php";
   // Controllers
-  require_once "./controllers/CountriesController.php";
+  require "./controllers/CountriesController.php";
 
   // ==================
   //       ROUTES

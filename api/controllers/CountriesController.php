@@ -4,7 +4,7 @@
   require_once $_SERVER["DOCUMENT_ROOT"] . "\api\access-limiter.php";
   // =================
 
-  require "./controllers/BaseController.php";
+  require_once "./controllers/BaseController.php";
 
   class CountriesController extends BaseController {
     public $allowedMethods = array("GET");
@@ -20,7 +20,7 @@
     private function getPathDetails($filters) {
       $unsetVarError;
       if (!isset($filters["type"])) {
-        $unsetVarError = "Must set request filter Value in query";
+        $unsetVarError = "Must set request filter Type in query";
       }
       if (!isset($filters["value"])) {
         $unsetVarError = "Must set request filter Value in query";
@@ -44,8 +44,8 @@
           $type = "alpha";
         }
       } else {
-        http_response_code(404);
-        echo json_encode(["status" => 404, "message" => "Not Found"]);
+        http_response_code(400);
+        echo json_encode(["status" => 400, "message" => "Invalid request filter Type"]);
         exit;
       }
 
