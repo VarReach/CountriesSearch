@@ -17,7 +17,7 @@
     //  PRIVATE METHODS
     // ==================
 
-    private function getPathDetails($filters) {
+    private function getDetails($filters) {
       $unsetVarError;
       if (!isset($filters["type"])) {
         $unsetVarError = "Must set request filter Type in query";
@@ -38,7 +38,7 @@
         // RestCountries expects fullName filters to be under the "name" path with "fullText=true" in the queryString
         if ($type === "fullName") {
           $type = "name";
-          $filters["fulltext"] = "true";
+          $filters["fullText"] = "true";
         // RestCountries expects code filters to be under the "alpha" path
         } else if ($type === "code") {
           $type = "alpha";
@@ -48,8 +48,11 @@
         echo json_encode(["status" => 400, "message" => "Invalid request filter Type"]);
         exit;
       }
+      // Remove now that we have included them in the path
+      unset($filters["type"]);
+      unset($filters["value"]);
 
-      return $type . "/" . $value;
+      return array($type, $value, $filters);
     }
 
     // ==================
@@ -57,14 +60,28 @@
     // ==================
 
     protected function get($filters) {
-      $path = $this->getPathDetails($filters);
-      $callback = null;
+      list($type, $value, $filters) = $this->getDetails($filters);
+
+      /**
+       * Callback to sort by population when searching by name or fullName
+       * When searching by code RestCountires only returns an individual country
+       */
+      function sortCountriesByPopulation($response) {
+        $countries = json_decode($response, true);
+
+        $sortedCountries = usort($countries, function($a, $b) {
+          return $b["population"] - $a["population"];
+        });
+
+        echo json_encode($countries);
+      }
 
       $this->execute("GET", [
         "filters" => $filters,
-        "path" => $path,
-        "callback" => $callback
+        "path" => $type . "/" . $value,
+        "callback" => $type !== "alpha" ? "sortCountriesByPopulation" : null
       ]);
+
     }
   }
 ?>

@@ -47,17 +47,14 @@
      */
     protected function execute($method, $options = array()) {
       // Init GuzzleHTTP Client
-      $client = new Client(["base_uri" => $this->uri]);
+      $client = new Client(["base_uri" => $this->uri, "http_errors" => false]);
 
       // Grab options
       $path = isset($options["path"]) ? $options["path"] : "";
       $filters = isset($options["filters"]) ? $options["filters"] : array();
       $callback = isset($options["callback"]) ? $options["callback"] : null;
 
-      // Don't throw exceptions on HTTP protocol errors, instead return the error
-      $filters['http_errors'] = false;
-
-      $response = $client->request($method, $path, $filters);
+      $response = $client->request($method, $path, [ "query" => $filters ]);
       $statusCode = $response->getStatusCode();
       if ($statusCode !== 200) {
         http_response_code($statusCode);
