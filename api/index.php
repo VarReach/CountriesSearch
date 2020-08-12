@@ -1,13 +1,13 @@
 <?php
   // =================
   // Prevent direct access to additional files
-  define('_ACCESSVAR', 1);
+  define("_ACCESSVAR", 1);
   // =================
 
-  require 'vendor/autoload.php';
-  require_once './router/BaseRouter.php';
+  require "vendor/autoload.php";
+  require_once "./router/BaseRouter.php";
   // Controllers
-  require_once './controllers/CountriesController.php';
+  require_once "./controllers/CountriesController.php";
 
   // ==================
   //       ROUTES

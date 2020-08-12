@@ -19,10 +19,10 @@
      * @constructor
      */
     function __construct() {
-      header('Content-type: application/json');
+      header("Content-type: application/json");
 
       // CORS Setup
-      if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+      if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         header("Access-Control-Allow-Methods: *");
         if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
           header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -30,8 +30,8 @@
       }
       header("Access-Control-Allow-Origin: *");
 
-      $this->uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-      $this->method = $_SERVER['REQUEST_METHOD'];
+      $this->uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+      $this->method = $_SERVER["REQUEST_METHOD"];
     }
 
     /**
@@ -50,6 +50,8 @@
       if (!$this->checkIfAllowedMethod($controller)) {
         $this->handleForbiddenMethod();
       }
+
+      $controller->handleRequest($this->method);
     }
 
     // ==================
@@ -63,10 +65,8 @@
      */
     public function use($route, $cont) {
       if (!isset($cont) or !isset($route)) {
-        http_response_code(500);
-        echo json_encode(["status" => 500, "message" => "Invalid route configuration"]);
-        exit;
-      }    
+        throw new \Exception("Must set Controller to use on provided Route");
+      }
 
       $this->routes[$route] = $cont;
     }
