@@ -1,5 +1,7 @@
 import React, { FC, useState } from "react";
-import { SearchType } from "../Services/CountriesService";
+import { SearchType } from "../../Services/CountriesService";
+// Components
+import SearchTypeDropdown from "./SearchTypeDropdown";
 
 interface SearchBarProps {
   page: "main" | "results";
@@ -28,12 +30,18 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
         autoCorrect="off" 
         onChange={updateSearchValue}
       />
-      <input
+      <button type="button">
+        <span>{searchType}</span>
+        <i className="material-icons">expand_more</i>
+      </button>
+      {/* <SearchTypeDropdown /> */}
+      <button
         id={`search_form_button__${page}`}
         className={`search_button__${page}`}
-        type="submit"
-        tabIndex={2}
-      />
+        tabIndex={3}
+      >
+        <i className="material-icons">search</i>
+      </button>
     </form>
   );
 }
