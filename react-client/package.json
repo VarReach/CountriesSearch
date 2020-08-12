@@ -4,10 +4,15 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html --open",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html",
+    "lint": "./node_modules/.bin/eslint ./src --fix"
   },
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-react": "^7.20.6",
     "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.7"
   },

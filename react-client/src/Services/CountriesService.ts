@@ -19,7 +19,7 @@ export interface Country {
   region: "AFRICA" | "AMERICAS" | "ASIA" | "EUROPE" | "OCEANIA",
   subregion: string,
   population: number,
-};
+}
 
 function CountriesService() {
   const service = {
