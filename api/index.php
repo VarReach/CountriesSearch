@@ -4,7 +4,7 @@
   define("_ACCESSVAR", 1);
   // =================
 
-  require "vendor/autoload.php";
+  require "../vendor/autoload.php";
   require "./router/BaseRouter.php";
   // Controllers
   require "./controllers/CountriesController.php";

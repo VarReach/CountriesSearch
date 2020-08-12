@@ -64,7 +64,7 @@
 
       /**
        * Callback to sort by population when searching by name or fullName
-       * When searching by code RestCountires only returns an individual country
+       * When searching by code RestCountries only returns an individual country
        */
       function sortCountriesByPopulation($response) {
         $countries = json_decode($response, true);
