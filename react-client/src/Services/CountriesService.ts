@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = `http://${window.location.hostname}:8765/api/countries`;
+const BASE_URL = `http://${window.location.hostname}:${window.location.port}/api/countries`;
 
 export type SearchType = "code" | "name" | "fullName";
 
