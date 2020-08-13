@@ -7,10 +7,12 @@ import globe from "../../Assets/globe.png";
 export const MainPage: FC = () => {
   return (
     <div className="main">
-      <img className="logo" src={globe} />
-      <SearchBar 
-        page={"main"}
-      />
+      <div className="main__search">
+        <img className="logo" src={globe} />
+        <SearchBar 
+          page={"main"}
+        />
+      </div>
     </div>
   );
 }
