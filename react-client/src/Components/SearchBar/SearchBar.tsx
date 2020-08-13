@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, useRef } from "react";
+import React, { FC, useState, useContext, useRef, useEffect } from "react";
 import { SearchType } from "../../Services/CountriesService";
 import "./SearchBar.css";
 // Context
@@ -12,8 +12,7 @@ export interface SearchBarProps {
 
 export const SearchBar: FC<SearchBarProps> = (props) => {
   const { page } = props;
-  const { fetchCountries } = useContext(SearchContext);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const { fetchCountries, searchValue, setSearchValue } = useContext(SearchContext);
   // Default to 'name' search type
   const [searchType, setSearchType] = useState<SearchType>("name");
   const [submitError, setSubmitError] = useState<boolean>(false);
@@ -96,7 +95,7 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
         autoCapitalize="off" 
         autoCorrect="off" 
         onChange={updateSearchValue}
-        autoFocus={true}
+        autoFocus={page === "main"}
         ref={searchInput}
       />
       <button 

@@ -4,24 +4,31 @@ import QS from "query-string";
 import "./App.css";
 // Components
 import MainPage from "./Components/MainPage/MainPage";
-import SearchPage from "./Components/SearchPage";
+import ResultsPage from "./Components/ResultsPage/ResultsPage";
 
 type SearchContextValue = {
   fetchCountries: (type: SearchType, value: string) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 }
-export const SearchContext = React.createContext<SearchContextValue>({ fetchCountries: () => null });
+export const SearchContext = React.createContext<SearchContextValue>({ 
+  fetchCountries: () => null,
+  searchValue: "",
+  setSearchValue: () => null
+});
 
 export const App: FC = () => {
   const [countries, setCountries] = useState<Country[]>();
   const [error, setError] = useState<Error>();
+  const [searchValue, setSearchValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchCountries = async (type: SearchType, value: string) => {
     if (!loading) setLoading(true);
+    updateURL({ type, value })
     try {
       const countries = await CountriesService.get(type, value);
       setCountries(countries);
-      updateURL({ type, value })
     } catch (err) {
       setError(err);
     } finally {
@@ -34,7 +41,7 @@ export const App: FC = () => {
     const queryString = QS.stringify(queries);
     const newUrl = new URL(window.location.href);
     newUrl.search = `?${queryString}`;
-    window.history.pushState(null, "", newUrl.href);
+    window.history.replaceState(null, "", newUrl.href);
   }
 
   useEffect(() => {
@@ -52,15 +59,22 @@ export const App: FC = () => {
         value = Array.isArray(value) ? value[value.length - 1] : value;
         // Remove additional values from URL
         updateURL({ value });
+        setSearchValue(value);
         fetchCountries(type, value);
       }
     }
   }, []);
 
   return (
-    <SearchContext.Provider value={{ fetchCountries }}>
-      {loading || (countries && countries.length) ? 
-      <SearchPage /> : 
+    <SearchContext.Provider 
+      value={{ 
+        fetchCountries,
+        searchValue,
+        setSearchValue
+      }}
+    >
+      {loading || error || (countries && countries.length) ? 
+      <ResultsPage /> : 
       <MainPage />
       }
     </SearchContext.Provider>

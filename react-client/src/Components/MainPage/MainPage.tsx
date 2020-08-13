@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import SearchBar from "../SearchBar/SearchBar";
 import "./MainPage.css"
 // Components
+/* @ts-ignore */
 import globe from "../../Assets/globe.png";
+import SearchBar from "../SearchBar/SearchBar";
 
 export const MainPage: FC = () => {
   return (
