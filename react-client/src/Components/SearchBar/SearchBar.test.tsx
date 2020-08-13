@@ -98,7 +98,7 @@ describe.only("<SearchBar/>", () => {
     });
 
     test("clicking on the selected type should close the dropdown", () => {
-      const { rerender } = render(
+      render(
         <SearchContext.Provider value={defaultContext}>
           <SearchBar {...defaultProps} />
         </SearchContext.Provider>

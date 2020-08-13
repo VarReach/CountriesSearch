@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App/> no query params renders main page without crashing 1`] = `
+<div>
+  <div
+    class="main"
+    data-testid="main"
+  >
+    <div
+      class="main__search"
+    >
+      <img
+        class="logo"
+        src="test-file-stub"
+      />
+      <form
+        class="search_form search_form__main"
+        id="search_form__main"
+      >
+        <input
+          autocapitalize="off"
+          autocomplete="off"
+          autocorrect="off"
+          class="search_form__input"
+          id="search_form__input_main"
+          tabindex="1"
+          value=""
+        />
+        <button
+          class="search_form__clear search_form__button hide"
+          id="search_form__clear"
+          type="button"
+        >
+          <i
+            class="material-icons"
+          >
+            clear
+          </i>
+        </button>
+        <div
+          class="search_form__inputs"
+        >
+          <button
+            class="search_form__type-button search_form__button"
+            id="search_form__type-button_main"
+            type="button"
+          >
+            <span>
+              name
+            </span>
+            <i
+              class="material-icons"
+            >
+              expand_more
+            </i>
+          </button>
+          <button
+            class="search_form__submit search_form__button"
+            id="search_form__submit_main"
+          >
+            <i
+              class="material-icons"
+            >
+              search
+            </i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 export const MainPage: FC = () => {
   return (
-    <div className="main">
+    <div className="main" data-testid="main">
       <div className="main__search">
         <img className="logo" src={globe} />
         <SearchBar 

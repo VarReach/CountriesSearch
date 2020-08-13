@@ -53,25 +53,22 @@ export const App: FC = () => {
 
   useEffect(() => {
     // Check for valid Query params -> execute the search
-    if (window.location.search) {
-      // Ignore unrelated query params
-      const queries = QS.parse(window.location.search);
-      const { type } = queries;
-      let { value } = queries;
-      // Check to make sure Type is valid, if it's not, clear it
-      if (type !== "code" && type !== "name" && type !== "fullName") {
-        updateURL({ type: undefined });
-      // Update the state if BOTH Type and Value are valid
-      } else if (type && value) {
-        if ((type === "code" && value.length >= 2 && value.length <= 3) || type !== "code") {
-          // Use last value if multiple are provided
-          value = Array.isArray(value) ? value[value.length - 1] : value;
-          // Remove additional values from URL
-          updateURL({ value });
-          setSearchType(type);
-          setSearchValue(value);
-          fetchCountries(type, value);
-        }
+    const queries = QS.parse(window.location.search);
+    const { type } = queries;
+    let { value } = queries;
+    // Check to make sure Type is valid, if it's not, clear it
+    if (type !== "code" && type !== "name" && type !== "fullName") {
+      updateURL({ type: undefined });
+    // Update the state if BOTH Type and Value are valid
+    } else if (type && value) {
+      if ((type === "code" && value.length >= 2 && value.length <= 3) || type !== "code") {
+        // Use last value if multiple are provided
+        value = Array.isArray(value) ? value[value.length - 1] : value;
+        // Remove additional values from URL
+        updateURL({ value });
+        setSearchType(type);
+        setSearchValue(value);
+        fetchCountries(type, value);
       }
     }
   }, []);

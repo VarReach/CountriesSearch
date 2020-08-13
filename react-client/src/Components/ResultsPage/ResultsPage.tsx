@@ -16,7 +16,7 @@ export interface ResultsPageProps {
 export const ResultsPage: FC<ResultsPageProps> = (props) => {
   const { error, countries } = props;
   return (
-    <div className="results">
+    <div className="results" data-testid="results">
       <Header />
       <div className="results__content">
         {countries && !error && (
@@ -31,7 +31,7 @@ export const ResultsPage: FC<ResultsPageProps> = (props) => {
         )}
         {error && (
           <div className="results__error">
-            {error && error.response.status === 404 ? "No results found." : "Something went wrong."}
+            {error && error.response && error.response.status === 404 ? "No results found." : "Something went wrong."}
           </div>
         )}
       </div>
