@@ -1,0 +1,25 @@
+.results {
+  position: relative;
+  min-height: 100vh;
+}
+
+.results__content {
+  min-height: calc(100vh - 8em);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.results__error {
+  padding: 2em;
+  color: #e45454;
+  font-size: 1.05em;
+}
+
+.results__content__country-list {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  flex-direction: column;
+  margin-bottom: auto;
+  padding: 2.4em;
+}

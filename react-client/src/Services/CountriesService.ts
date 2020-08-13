@@ -1,4 +1,3 @@
-import { Url } from "url";
 import axios from "axios";
 
 const BASE_URL = `http://${window.location.hostname}:8765/api/countries`;
@@ -12,10 +11,10 @@ export interface Country {
     name: string,
     nativeName: string,
   }[],
-  flag: Url,
+  flag: string,
   name: string,
-  alpha2code: string,
-  alpha3code: string,
+  alpha2Code: string,
+  alpha3Code: string,
   region: "AFRICA" | "AMERICAS" | "ASIA" | "EUROPE" | "OCEANIA",
   subregion: string,
   population: number,

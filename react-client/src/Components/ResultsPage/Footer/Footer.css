@@ -1,0 +1,25 @@
+.results__footer {
+  background-color: #141414;
+  position: relative;
+  bottom: 0;
+  padding: 1em 2em 4em;
+}
+
+.results__footer__counts {
+  display: flex;
+}
+
+.results__footer__regions,
+.results__footer__subregions {
+  width: 50%;
+}
+
+.results__footer__counts h3 {
+  font-size: 0.95em;
+  margin: 0;
+  display: inline;
+}
+.results__footer__counts span {
+  margin-right: 3em;
+  display: block;
+}

@@ -20,7 +20,7 @@
 }
 
 .search_form.error .search_form__input {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #e45454;
 }
 
 .search_form__input {
@@ -83,10 +83,10 @@
   background-color: #64a23a;
 }
 .search_form__submit.highlight * {
-  color: #c5c1c1;
+  color: #d6d3d3;
 }
 .search_form__submit.highlight:hover * {
-  color: #d6d3d3;
+  color: #f9f9f9;
 }
 
 .search_form__type-button {
@@ -107,6 +107,14 @@
 }
 .search_form__clear i {
   font-size: 1.2em !important;
+}
+
+.search_form__error {
+  position: absolute;
+  top: 100%;
+  left: 2.2em;
+  font-size: 0.8em;
+  color: #e45454;
 }
 
 

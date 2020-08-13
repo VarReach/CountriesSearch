@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import CountriesService, { Country, SearchType } from "./Services/CountriesService";
 import QS from "query-string";
+import { AxiosError } from "axios";
 import "./App.css";
 // Components
 import MainPage from "./Components/MainPage/MainPage";
@@ -19,7 +20,7 @@ export const SearchContext = React.createContext<SearchContextValue>({
 
 export const App: FC = () => {
   const [countries, setCountries] = useState<Country[]>();
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<AxiosError>();
   const [searchValue, setSearchValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -29,6 +30,7 @@ export const App: FC = () => {
     try {
       const countries = await CountriesService.get(type, value);
       setCountries(countries);
+      if (error) setError(null);
     } catch (err) {
       setError(err);
     } finally {
@@ -45,7 +47,7 @@ export const App: FC = () => {
   }
 
   useEffect(() => {
-    // Check for valid Querie params -> execute the search
+    // Check for valid Query params -> execute the search
     if (window.location.search) {
       // Ignore unrelated query params
       const queries = QS.parse(window.location.search);
@@ -74,7 +76,11 @@ export const App: FC = () => {
       }}
     >
       {loading || error || (countries && countries.length) ? 
-      <ResultsPage /> : 
+      <ResultsPage 
+        loading={loading}
+        error={error}
+        countries={countries}
+      /> : 
       <MainPage />
       }
     </SearchContext.Provider>

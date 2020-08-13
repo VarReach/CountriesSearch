@@ -1,0 +1,26 @@
+.results__country-card {
+  display: inline-block;
+  /* background-color: darkgrey; */
+}
+
+.results__country-card__content {
+  padding: 0 1em;
+}
+
+.results__country-card img {
+  max-width: 10em;
+}
+
+.results__country-card h4 {
+  display: inline-block;
+  margin: 0;
+}
+
+.results__country-card span {
+  display: block;
+}
+
+.results__country-card ul {
+  margin: 0;
+  list-style: none;
+}

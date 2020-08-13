@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, useRef, useEffect } from "react";
+import React, { FC, useState, useContext, useRef } from "react";
 import { SearchType } from "../../Services/CountriesService";
 import "./SearchBar.css";
 // Context
@@ -130,6 +130,9 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
           <i className="material-icons">search</i>
         </button>
       </div>
+      {submitError && (<span className="search_form__error">
+        Please enter a value.
+      </span>)}
     </form>
   );
 }

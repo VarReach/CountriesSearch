@@ -1,0 +1,20 @@
+.results__header {
+  position: relative;
+  background-color: #141414;
+  height: 8em;
+  border-bottom: 2px solid #141414;
+}
+
+.results__header .results__search {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.results__header .logo {
+  position: relative;
+  height: 4em;
+  width: 4em;
+  bottom: initial;
+  margin: 0 0.6em 0 1.4em;
+}
