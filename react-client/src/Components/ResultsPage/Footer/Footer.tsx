@@ -8,7 +8,6 @@ export interface FooterProps {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { countries } = props;
-
   const [counts, setCounts] = useState<{ regionCounts, subregionCounts }>({ regionCounts: {}, subregionCounts: {} });
 
   useEffect(() => {

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer/> renders without crashing 1`] = `
+<div>
+  <div
+    class="results__footer"
+  >
+    <div
+      class="results__footer__total-count"
+    >
+      <h2>
+        Total Number of Countries Found:
+      </h2>
+      <h3>
+        1
+      </h3>
+    </div>
+    <div
+      class="results__footer__counts"
+    >
+      <div
+        class="results__footer__regions"
+      >
+        <h2>
+          Regions:
+        </h2>
+        <span>
+          <h3>
+            Test-land
+            :
+          </h3>
+           
+          1
+        </span>
+      </div>
+      <div
+        class="results__footer__subregions"
+      >
+        <h2>
+          Subregions:
+        </h2>
+        <span>
+          <h3>
+            Test-land
+            :
+          </h3>
+           
+          1
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

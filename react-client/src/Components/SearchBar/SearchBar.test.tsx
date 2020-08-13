@@ -4,18 +4,27 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import { SearchContext } from "../../App";
 // Components
 import SearchBar, { SearchBarProps } from "./SearchBar";
+import { SearchType } from "../../Services/CountriesService";
 
 /**
  * Covers tests for the SearchBar and SearchTypeDropdown
  */
-describe("<SearchBar/>", () => {
-  const defaultContext = {
-    fetchCountries: jest.fn(),
-  };
+describe.only("<SearchBar/>", () => {
+  let defaultContext;
 
   const defaultProps: SearchBarProps = {
     page: "main",
   };
+
+  beforeEach(() => {
+    defaultContext = {
+      fetchCountries: jest.fn(),
+      searchValue: "",
+      setSearchValue: jest.fn((value) => defaultContext.searchValue = value),
+      searchType: "name" as SearchType,
+      setSearchType: jest.fn((type) => defaultContext.searchType = type),
+    };
+  })
 
   test("renders without crashing", () => {
     const { container } = render(
@@ -68,7 +77,7 @@ describe("<SearchBar/>", () => {
     });
 
     test("clicking on a list button should close the dropdown and update search type", () => {
-      render(
+      const { rerender } = render(
         <SearchContext.Provider value={defaultContext}>
           <SearchBar {...defaultProps} />
         </SearchContext.Provider>
@@ -78,12 +87,18 @@ describe("<SearchBar/>", () => {
       expect(screen.getByRole("listbox")).toBeTruthy();
 
       fireEvent.click(screen.getByText("full name"));
+
+      rerender(
+        <SearchContext.Provider value={defaultContext}>
+          <SearchBar {...defaultProps} />
+        </SearchContext.Provider>
+      );
       expect(screen.queryByRole("listbox")).toBeFalsy();
       expect(screen.getByRole("button", { name: "full name expand_more" })).toBeTruthy();
     });
 
     test("clicking on the selected type should close the dropdown", () => {
-      render(
+      const { rerender } = render(
         <SearchContext.Provider value={defaultContext}>
           <SearchBar {...defaultProps} />
         </SearchContext.Provider>
@@ -100,7 +115,7 @@ describe("<SearchBar/>", () => {
   });
 
   test("When search type is code, the input is limited to max 3 characters", () => {
-    render(
+    const { rerender } = render(
       <SearchContext.Provider value={defaultContext}>
         <SearchBar {...defaultProps} />
       </SearchContext.Provider>
@@ -110,10 +125,24 @@ describe("<SearchBar/>", () => {
     expect(screen.getByRole("listbox")).toBeTruthy();
 
     fireEvent.click(screen.getByText("code"));
+
+    rerender(
+      <SearchContext.Provider value={defaultContext}>
+        <SearchBar {...defaultProps} />
+      </SearchContext.Provider>
+    );
+
     expect(screen.queryByRole("listbox")).toBeFalsy();
     expect(screen.getByRole("button", { name: "code expand_more" })).toBeTruthy();
 
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "testing" } });
+
+    rerender(
+      <SearchContext.Provider value={defaultContext}>
+        <SearchBar {...defaultProps} />
+      </SearchContext.Provider>
+    );
+
     expect(screen.queryByDisplayValue("testing")).toBeFalsy();
     expect(screen.getByDisplayValue("tes")).toBeTruthy();
   });
@@ -206,7 +235,7 @@ describe("<SearchBar/>", () => {
   });
 
   test("should attempt to fetch countries if input is empty", () => {
-    render(
+    const { rerender } = render(
       <SearchContext.Provider value={defaultContext}>
         <SearchBar {...defaultProps} />
       </SearchContext.Provider>
@@ -216,7 +245,14 @@ describe("<SearchBar/>", () => {
     expect(screen.getByRole("listbox")).toBeTruthy();
 
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "testing" } });
+    rerender(
+      <SearchContext.Provider value={defaultContext}>
+        <SearchBar {...defaultProps} />
+      </SearchContext.Provider>
+    );
+
     fireEvent.click(screen.getByRole("button", { name: "search" }));
+
     expect(defaultContext.fetchCountries).toHaveBeenCalled();
   });
 });

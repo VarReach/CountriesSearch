@@ -12,9 +12,15 @@ export interface SearchBarProps {
 
 export const SearchBar: FC<SearchBarProps> = (props) => {
   const { page } = props;
-  const { fetchCountries, searchValue, setSearchValue } = useContext(SearchContext);
+  const {
+   fetchCountries, 
+   searchValue, 
+   setSearchValue, 
+   searchType, 
+   setSearchType 
+  } = useContext(SearchContext);
   // Default to 'name' search type
-  const [searchType, setSearchType] = useState<SearchType>("name");
+
   const [submitError, setSubmitError] = useState<boolean>(false);
   const [showTypeDropdown, setShowTypeDropdown] = useState<boolean>(false);
   

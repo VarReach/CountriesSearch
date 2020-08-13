@@ -11,17 +11,22 @@ type SearchContextValue = {
   fetchCountries: (type: SearchType, value: string) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  searchType: SearchType;
+  setSearchType: (type: SearchType) => void;
 }
 export const SearchContext = React.createContext<SearchContextValue>({ 
   fetchCountries: () => null,
   searchValue: "",
-  setSearchValue: () => null
+  setSearchValue: () => null,
+  searchType: "name",
+  setSearchType: () => null,
 });
 
 export const App: FC = () => {
   const [countries, setCountries] = useState<Country[]>();
   const [error, setError] = useState<AxiosError>();
   const [searchValue, setSearchValue] = useState<string>("");
+  const [searchType, setSearchType] = useState<SearchType>("name");
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchCountries = async (type: SearchType, value: string) => {
@@ -56,13 +61,17 @@ export const App: FC = () => {
       // Check to make sure Type is valid, if it's not, clear it
       if (type !== "code" && type !== "name" && type !== "fullName") {
         updateURL({ type: undefined });
+      // Update the state if BOTH Type and Value are valid
       } else if (type && value) {
-        // Use last value if multiple are provided
-        value = Array.isArray(value) ? value[value.length - 1] : value;
-        // Remove additional values from URL
-        updateURL({ value });
-        setSearchValue(value);
-        fetchCountries(type, value);
+        if ((type === "code" && value.length >= 2 && value.length <= 3) || type !== "code") {
+          // Use last value if multiple are provided
+          value = Array.isArray(value) ? value[value.length - 1] : value;
+          // Remove additional values from URL
+          updateURL({ value });
+          setSearchType(type);
+          setSearchValue(value);
+          fetchCountries(type, value);
+        }
       }
     }
   }, []);
@@ -72,7 +81,9 @@ export const App: FC = () => {
       value={{ 
         fetchCountries,
         searchValue,
-        setSearchValue
+        setSearchValue,
+        searchType,
+        setSearchType
       }}
     >
       {loading || error || (countries && countries.length) ? 

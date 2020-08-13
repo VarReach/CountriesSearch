@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CountryCard/> renders without crashing 1`] = `
+<div>
+  <div
+    class="results__country-card"
+  >
+    <h3>
+      Test Country
+    </h3>
+    <div
+      class="results__country-card__content"
+    >
+      <img
+        src="testflag.png"
+      />
+      <div>
+        <span>
+          <h4>
+            Alpha Code 2:
+          </h4>
+           
+          TS
+        </span>
+        <span>
+          <h4>
+            Alpha Code 3:
+          </h4>
+           
+          TST
+        </span>
+      </div>
+      <div>
+        <span>
+          <h4>
+            Region:
+          </h4>
+           
+          AMERICAS
+        </span>
+        <span>
+          <h4>
+            Subregion:
+          </h4>
+           
+          Test-land
+        </span>
+      </div>
+      <div>
+        <span>
+          <h4>
+            Population:
+          </h4>
+           
+          1
+        </span>
+      </div>
+      <div>
+        <h4>
+          Languages:
+        </h4>
+        <ul>
+          <li>
+            Test Language
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;

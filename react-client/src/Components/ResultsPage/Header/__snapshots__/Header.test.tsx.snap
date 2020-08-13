@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> renders without crashing 1`] = `
+<div>
+  <div
+    class="results__header"
+  >
+    <div
+      class="results__search"
+    >
+      <img
+        class="logo"
+        src="test-file-stub"
+      />
+      <form
+        class="search_form search_form__results"
+        id="search_form__results"
+      >
+        <input
+          autocapitalize="off"
+          autocomplete="off"
+          autocorrect="off"
+          class="search_form__input"
+          id="search_form__input_results"
+          tabindex="1"
+          value=""
+        />
+        <button
+          class="search_form__clear search_form__button hide"
+          id="search_form__clear"
+          type="button"
+        >
+          <i
+            class="material-icons"
+          >
+            clear
+          </i>
+        </button>
+        <div
+          class="search_form__inputs"
+        >
+          <button
+            class="search_form__type-button search_form__button"
+            id="search_form__type-button_results"
+            type="button"
+          >
+            <span>
+              name
+            </span>
+            <i
+              class="material-icons"
+            >
+              expand_more
+            </i>
+          </button>
+          <button
+            class="search_form__submit search_form__button"
+            id="search_form__submit_results"
+          >
+            <i
+              class="material-icons"
+            >
+              search
+            </i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
