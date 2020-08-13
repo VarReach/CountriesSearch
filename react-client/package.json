@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html --open",
-    "build": "parcel build ./src/index.html",
+    "build": "parcel build ./src/index.html --public-url /react-client/dist/",
     "lint": "./node_modules/.bin/eslint ./src --fix",
     "test": "jest ./src"
   },
