@@ -5,15 +5,36 @@
   "scripts": {
     "start": "parcel ./src/index.html --open",
     "build": "parcel build ./src/index.html",
-    "lint": "./node_modules/.bin/eslint ./src --fix"
+    "lint": "./node_modules/.bin/eslint ./src --fix",
+    "test": "jest ./src"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": ".*test.(js|ts|tsx)$",
+    "moduleNameMapper": {
+      "\\.png$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.css$": "identity-obj-proxy"
+    }
   },
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.3",
+    "@testing-library/react": "^10.4.8",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "eslint": "^7.6.0",
     "eslint-plugin-react": "^7.20.6",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.4.0",
     "parcel-bundler": "^1.12.4",
+    "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {

@@ -20,6 +20,7 @@
         "react",
         "@typescript-eslint"
     ],
+    "ignorePatterns": "**/__mocks__/",
     "rules": {
       "react/prop-types": 0
     }

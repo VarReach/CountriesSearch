@@ -6,7 +6,7 @@ import { SearchContext } from "../../App";
 // Components
 import SearchTypeDropdown from "./SearchTypeDropdown";
 
-interface SearchBarProps {
+export interface SearchBarProps {
   page: "main" | "results";
 }
 
@@ -20,6 +20,7 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
   const [showTypeDropdown, setShowTypeDropdown] = useState<boolean>(false);
   
   const searchInput = useRef(null);
+
   /**
    * Updates the controlled search input's value
    * Enforces "Code" type expectation of 2-3 characters
@@ -59,7 +60,6 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
     } else {
       setShowTypeDropdown(visible);
     }
-
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -118,12 +118,12 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
           <i className="material-icons">expand_more</i>
         </button>
         <SearchTypeDropdown 
-            page={page}
-            visible={showTypeDropdown}
-            setVisible={toggleTypeDropdown}
-            selectedType={searchType}
-            switchType={switchType}
-          />
+          page={page}
+          visible={showTypeDropdown}
+          setVisible={toggleTypeDropdown}
+          selectedType={searchType}
+          switchType={switchType}
+        />
         <button
           id={`search_form__submit_${page}`}
           className={searchButtonClasses}
